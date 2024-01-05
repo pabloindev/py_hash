@@ -31,12 +31,17 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
-        # carico il file creato con qt designer
-        uic.loadUi("main.ui", self)
-
         # setto variili della classe che mi possono essere utili
         self.working_dir = get_working_directory()
         set_working_directory()
+        
+        # carico il file creato con qt designer
+        uic.loadUi("main.ui", self)
+
+
+        # creo la cartella dei log se non esiste
+        if not os.path.exists(os.path.join(self.working_dir,"logs")): 
+            os.makedirs(os.path.join(self.working_dir,"logs")) 
 
         # imposto logging su file
         logging.basicConfig(
@@ -46,7 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
             , handlers=[
                 #logging.FileHandler(LOG_FILENAME), # nome del file di log, di questo handler non ho bisogno poichè sul file disk scrive già RotatingFileHandler
                 logging.StreamHandler(sys.stdout),  # quando vado a inserire un log stampo anche su console
-                logging.handlers.RotatingFileHandler(os.path.join(self.working_dir,"logs","app.log"), maxBytes=1000000, backupCount=5) # log rotating 1MB
+                logging.handlers.RotatingFileHandler(os.path.join(self.working_dir,"logs","app.log"), maxBytes=1000000, backupCount=5, encoding='utf-8') # log rotating 1MB
             ]
         )
         logging.debug('*********************************************')
