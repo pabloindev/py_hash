@@ -138,6 +138,9 @@
        <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
+       <property name="styleSheet">
+        <string notr="true">background-color:#FFF6F4</string>
+       </property>
        <attribute name="title">
         <string>String Hash</string>
        </attribute>
@@ -225,6 +228,9 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
+       <property name="styleSheet">
+        <string notr="true">background-color:#F4FFF6</string>
+       </property>
        <attribute name="title">
         <string>File Hash</string>
        </attribute>
